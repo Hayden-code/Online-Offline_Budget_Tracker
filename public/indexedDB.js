@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 let db;
 const request = window.indexedDB.open("budget", 1);
 
@@ -22,7 +20,7 @@ request.onerror = (error) => {
 function collectData() {
   let transaction = db.transaction(["budget"], "readwrite");
   const budgetStore = transaction.objectStore("budget");
-  const getAll = budget.getAll();
+  const getAll = budgetStore.getAll();
   getAll.onsuccess = () => {
     if (getAll.result.length > 0) {
       fetch("/api/transaction", {
